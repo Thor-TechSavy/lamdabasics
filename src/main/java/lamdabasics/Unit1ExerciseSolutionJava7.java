@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+interface Condition {
+    boolean test(Person person);
+}
+
 public class Unit1ExerciseSolutionJava7 {
     public static void main(String[] args) {
         List<Person> people = Arrays.asList(
@@ -22,23 +26,27 @@ public class Unit1ExerciseSolutionJava7 {
             }
         });
         //create method to print all elements in the list
-        printAll(people);
+        printConditionally(people, new Condition() {
+            @Override
+            public boolean test(Person person) {
+                return true;
+            }
+        });
         //create method to print all elements that have last name beginning with C
-        printLastNameBeginsWithC(people);
+        printConditionally(people, new Condition() {
+            @Override
+            public boolean test(Person person) {
+                return person.getLastName().startsWith("C");
+            }
+        });
     }
 
-    private static void printLastNameBeginsWithC(List<Person> people) {
+    private static void printConditionally(List<Person> people, Condition condition) {
         for (Person p : people) {
-            if (p.getLastName().startsWith("C")) {
+            if (condition.test(p)) {
                 System.out.println(p);
             }
         }
 
-    }
-
-    private static void printAll(List<Person> people) {
-        for (Person p : people) {
-            System.out.println(p);
-        }
     }
 }
