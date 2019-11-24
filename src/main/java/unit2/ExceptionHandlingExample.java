@@ -6,13 +6,9 @@ public class ExceptionHandlingExample {
     public static void main(String[] args) {
         int[] someNumbers = {1, 2, 3, 4, 5};
         int key = 2;
-        process(someNumbers, key, (v, k) -> {
-            try {
-                System.out.println(v / k);
-            } catch (ArithmeticException e) {
-                System.out.println("Arithmetic exception happened");
-            }
-        });
+        process(someNumbers, key, wrapperLambda((v, k) ->
+                System.out.println(v / k))
+        );
 
     }
 
@@ -20,5 +16,9 @@ public class ExceptionHandlingExample {
         for (int i : someNumbers) {
                 biConsumer.accept(i, key);
         }
+    }
+
+    private static BiConsumer<Integer, Integer> wrapperLambda(BiConsumer<Integer, Integer> biConsumer) {
+        return biConsumer;
     }
 }
