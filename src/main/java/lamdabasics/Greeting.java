@@ -6,4 +6,5 @@ functional interface should have only one method
 public interface Greeting {
     void perform();
 
+
 }
