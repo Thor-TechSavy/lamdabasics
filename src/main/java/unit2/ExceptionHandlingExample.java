@@ -5,7 +5,7 @@ import java.util.function.BiConsumer;
 public class ExceptionHandlingExample {
     public static void main(String[] args) {
         int[] someNumbers = {1, 2, 3, 4, 5};
-        int key = 2;
+        int key = 0;
         process(someNumbers, key, wrapperLambda((v, k) ->
                 System.out.println(v / k))
         );
@@ -19,6 +19,12 @@ public class ExceptionHandlingExample {
     }
 
     private static BiConsumer<Integer, Integer> wrapperLambda(BiConsumer<Integer, Integer> biConsumer) {
-        return biConsumer;
+        return (v, k) -> {
+            try {
+                biConsumer.accept(v, k);
+            } catch (ArithmeticException e) {
+                System.out.println("Arithmetic exception caught inside wrapper lambda");
+            }
+        };
     }
 }
