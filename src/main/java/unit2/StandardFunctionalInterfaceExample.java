@@ -5,6 +5,7 @@ import common.Person;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class StandardFunctionalInterfaceExample {
@@ -21,16 +22,17 @@ public class StandardFunctionalInterfaceExample {
                 .compareTo(p2.getLastName()));
 
         //create method to print all elements in the list
-        printConditionally(people, p -> true);
+        performConditionally(people, p -> true, p -> System.out.println(p));
 
         //create method to print all elements that have last name beginning with C
-        printConditionally(people, p -> p.getLastName().startsWith("C"));
+        performConditionally(people, p -> p.getLastName().startsWith("C"), p -> System.out.println(p));
     }
 
-    private static void printConditionally(List<Person> people, Predicate<Person> predicate) {
+    private static void performConditionally(List<Person> people,
+                                             Predicate<Person> predicate, Consumer<Person> consumer) {
         for (Person p : people) {
             if (predicate.test(p)) {
-                System.out.println(p);
+                consumer.accept(p);
             }
         }
 
