@@ -1,4 +1,4 @@
-package lamdabasics;
+package unit1;
 /*
 functional interface should have only one method
  */

@@ -1,6 +1,4 @@
-package lamdabasics;
-
-import java.sql.SQLOutput;
+package unit1;
 
 public class HelloWorldGreeting implements Greeting {
     public void perform() {
