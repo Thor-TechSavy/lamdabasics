@@ -14,8 +14,12 @@ public class StreamExample1 {
                 new Person("Charlotte", "Bronte", 45),
                 new Person("Matthew", "Arnold", 39)
         );
-        people.stream()
+   /*     people.stream() //new view of collection , could be seen as a conveyor belt
+                .filter(p -> p.getLastName().startsWith("C")) // an operation
+                .forEach(p -> System.out.println(p.getFirstName()));//terminal operation , END operation*/
+        long count = people.parallelStream()
                 .filter(p -> p.getLastName().startsWith("C"))
-                .forEach(p -> System.out.println(p.getFirstName()));
+                .count();
+        System.out.println(count);
     }
 }
